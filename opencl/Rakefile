@@ -1,0 +1,6 @@
+require "bundler/gem_tasks"
+
+desc "Run console"
+task :console do
+  sh 'bundle exec irb -rubygems -I lib -ropencl'
+end
