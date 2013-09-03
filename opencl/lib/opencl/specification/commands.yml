@@ -314,101 +314,131 @@ clGetProgramBuildInfo:
 
 # Kernel Object APIs
 
-extern CL_API_ENTRY cl_kernel CL_API_CALL
-clCreateKernel(cl_program      /* program */,
-               const char *    /* kernel_name */,
-               cl_int *        /* errcode_ret */) CL_API_SUFFIX__VERSION_1_0;
-
-extern CL_API_ENTRY cl_int CL_API_CALL
-clCreateKernelsInProgram(cl_program     /* program */,
-                         cl_uint        /* num_kernels */,
-                         cl_kernel *    /* kernels */,
-                         cl_uint *      /* num_kernels_ret */) CL_API_SUFFIX__VERSION_1_0;
-
-extern CL_API_ENTRY cl_int CL_API_CALL
-clRetainKernel(cl_kernel    /* kernel */) CL_API_SUFFIX__VERSION_1_0;
-
-extern CL_API_ENTRY cl_int CL_API_CALL
-clReleaseKernel(cl_kernel   /* kernel */) CL_API_SUFFIX__VERSION_1_0;
-
-extern CL_API_ENTRY cl_int CL_API_CALL
-clSetKernelArg(cl_kernel    /* kernel */,
-               cl_uint      /* arg_index */,
-               size_t       /* arg_size */,
-               const void * /* arg_value */) CL_API_SUFFIX__VERSION_1_0;
-
-extern CL_API_ENTRY cl_int CL_API_CALL
-clGetKernelInfo(cl_kernel       /* kernel */,
-                cl_kernel_info  /* param_name */,
-                size_t          /* param_value_size */,
-                void *          /* param_value */,
-                size_t *        /* param_value_size_ret */) CL_API_SUFFIX__VERSION_1_0;
-
-extern CL_API_ENTRY cl_int CL_API_CALL
-clGetKernelArgInfo(cl_kernel       /* kernel */,
-                   cl_uint         /* arg_indx */,
-                   cl_kernel_arg_info  /* param_name */,
-                   size_t          /* param_value_size */,
-                   void *          /* param_value */,
-                   size_t *        /* param_value_size_ret */) CL_API_SUFFIX__VERSION_1_2;
-
-extern CL_API_ENTRY cl_int CL_API_CALL
-clGetKernelWorkGroupInfo(cl_kernel                  /* kernel */,
-                         cl_device_id               /* device */,
-                         cl_kernel_work_group_info  /* param_name */,
-                         size_t                     /* param_value_size */,
-                         void *                     /* param_value */,
-                         size_t *                   /* param_value_size_ret */) CL_API_SUFFIX__VERSION_1_0;
+clCreateKernel:
+  return_type: [cl_kernel]
+  parameters:
+  - [cl_program, program]
+  - [const, char, '*', kernel_name]
+  - [cl_int, '*', errcode_ret]
+clCreateKernelsInProgram:
+  return_type: [cl_int]
+  parameters:
+  - [cl_program, program]
+  - [cl_uint, num_kernels]
+  - [cl_kernel, '*', kernels]
+  - [cl_uint, '*', num_kernels_ret]
+clRetainKernel:
+  return_type: [cl_int]
+  parameters:
+  - [cl_kernel, kernel]
+clReleaseKernel:
+  return_type: [cl_int]
+  parameters:
+  - [cl_kernel, kernel]
+clSetKernelArg:
+  return_type: [cl_int]
+  parameters:
+  - [cl_kernel, kernel]
+  - [cl_uint, arg_index]
+  - [size_t, arg_size]
+  - [const, void, '*', arg_value]
+clGetKernelInfo:
+  return_type: [cl_int]
+  parameters:
+  - [cl_kernel, kernel]
+  - [cl_kernel_info, param_name]
+  - [size_t, param_value_size]
+  - [void, '*', param_value]
+  - [size_t, '*', param_value_size_ret]
+clGetKernelArgInfo:
+  return_type: [cl_int]
+  parameters:
+  - [cl_kernel, kernel]
+  - [cl_uint, arg_indx]
+  - [cl_kernel_arg_info, param_name]
+  - [size_t, param_value_size]
+  - [void, '*', param_value]
+  - [size_t, '*', param_value_size_ret]
+clGetKernelWorkGroupInfo:
+  return_type: [cl_int]
+  parameters:
+  - [cl_kernel, kernel]
+  - [cl_device_id, device]
+  - [cl_kernel_work_group_info, param_name]
+  - [size_t, param_value_size]
+  - [void, '*', param_value]
+  - [size_t, '*', param_value_size_ret]
 
 # Event Object APIs
 
-extern CL_API_ENTRY cl_int CL_API_CALL
-clWaitForEvents(cl_uint             /* num_events */,
-                const cl_event *    /* event_list */) CL_API_SUFFIX__VERSION_1_0;
+clWaitForEvents:
+  return_type: [cl_int]
+  parameters:
+  - [cl_uint, num_events]
+  - [const, cl_event, '*', event_list]
 
 extern CL_API_ENTRY cl_int CL_API_CALL
-clGetEventInfo(cl_event         /* event */,
-               cl_event_info    /* param_name */,
-               size_t           /* param_value_size */,
-               void *           /* param_value */,
-               size_t *         /* param_value_size_ret */) CL_API_SUFFIX__VERSION_1_0;
-                            
-extern CL_API_ENTRY cl_event CL_API_CALL
-clCreateUserEvent(cl_context    /* context */,
-                  cl_int *      /* errcode_ret */) CL_API_SUFFIX__VERSION_1_1;               
-                            
-extern CL_API_ENTRY cl_int CL_API_CALL
-clRetainEvent(cl_event /* event */) CL_API_SUFFIX__VERSION_1_0;
-
-extern CL_API_ENTRY cl_int CL_API_CALL
-clReleaseEvent(cl_event /* event */) CL_API_SUFFIX__VERSION_1_0;
-
-extern CL_API_ENTRY cl_int CL_API_CALL
-clSetUserEventStatus(cl_event   /* event */,
-                     cl_int     /* execution_status */) CL_API_SUFFIX__VERSION_1_1;
-                     
-extern CL_API_ENTRY cl_int CL_API_CALL
-clSetEventCallback( cl_event    /* event */,
-                    cl_int      /* command_exec_callback_type */,
-                    void (CL_CALLBACK * /* pfn_notify */)(cl_event, cl_int, void *),
-                    void *      /* user_data */) CL_API_SUFFIX__VERSION_1_1;
+clGetEventInfo:
+  return_type: [cl_int]
+  parameters:
+  - [cl_event, event]
+  - [cl_event_info, param_name]
+  - [size_t, param_value_size]
+  - [void, '*', param_value]
+  - [size_t, '*', param_value_size_ret]
+clCreateUserEvent:
+  return_type: [cl_event]
+  parameters:
+  - [cl_context, context]
+  - [cl_int, '*', errcode_ret]
+clRetainEvent:
+  return_type: [cl_int]
+  parameters:
+  - [cl_event, event]
+clReleaseEvent:
+  return_type: [cl_int]
+  parameters:
+  - [cl_event, event]
+clSetUserEventStatus:
+  return_type: [cl_int]
+  parameters:
+  - [cl_event, event]
+  - [cl_int, execution_status]
+cl_EventCallback:
+  return_type: [void]
+  parameters:
+  - [cl_event, event]
+  - [cl_int, exec_status]
+  - [void, '*', user_data]
+clSetEventCallback:
+  return_type: [cl_int]
+  parameters:
+  - [cl_event, event]
+  - [cl_int, command_exec_callback_type]
+  - [cl_EventCallback, callback]
+  - [void, '*', user_data]
 
 # Profiling APIs
 
-extern CL_API_ENTRY cl_int CL_API_CALL
-clGetEventProfilingInfo(cl_event            /* event */,
-                        cl_profiling_info   /* param_name */,
-                        size_t              /* param_value_size */,
-                        void *              /* param_value */,
-                        size_t *            /* param_value_size_ret */) CL_API_SUFFIX__VERSION_1_0;
+clGetEventProfilingInfo:
+  return_type: [cl_int]
+  parameters:
+  - [cl_event, event]
+  - [cl_profiling_info, param_name]
+  - [size_t, param_value_size]
+  - [void, '*', param_value]
+  - [size_t, '*', param_value_size_ret]
 
 # Flush and Finish APIs
 
-extern CL_API_ENTRY cl_int CL_API_CALL
-clFlush(cl_command_queue /* command_queue */) CL_API_SUFFIX__VERSION_1_0;
-
-extern CL_API_ENTRY cl_int CL_API_CALL
-clFinish(cl_command_queue /* command_queue */) CL_API_SUFFIX__VERSION_1_0;
+clFlush:
+  return_type: [cl_int]
+  parameters:
+  - [cl_command_queue, command_queue]
+clFinish:
+  return_type: [cl_int]
+  parameters:
+  - [cl_command_queue, command_queue]
 
 # Enqueued Commands APIs
 
