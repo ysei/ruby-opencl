@@ -51,80 +51,101 @@ clReleaseDevice:
   - [cl_device_id, device]
 
 # Context APIs
-
-extern CL_API_ENTRY cl_context CL_API_CALL
-clCreateContext(const cl_context_properties * /* properties */,
-                cl_uint                 /* num_devices */,
-                const cl_device_id *    /* devices */,
-                void (CL_CALLBACK * /* pfn_notify */)(const char *, const void *, size_t, void *),
-                void *                  /* user_data */,
-                cl_int *                /* errcode_ret */) CL_API_SUFFIX__VERSION_1_0;
-
-extern CL_API_ENTRY cl_context CL_API_CALL
-clCreateContextFromType(const cl_context_properties * /* properties */,
-                        cl_device_type          /* device_type */,
-                        void (CL_CALLBACK *     /* pfn_notify*/ )(const char *, const void *, size_t, void *),
-                        void *                  /* user_data */,
-                        cl_int *                /* errcode_ret */) CL_API_SUFFIX__VERSION_1_0;
-
-extern CL_API_ENTRY cl_int CL_API_CALL
-clRetainContext(cl_context /* context */) CL_API_SUFFIX__VERSION_1_0;
-
-extern CL_API_ENTRY cl_int CL_API_CALL
-clReleaseContext(cl_context /* context */) CL_API_SUFFIX__VERSION_1_0;
-
-extern CL_API_ENTRY cl_int CL_API_CALL
-clGetContextInfo(cl_context         /* context */, 
-                 cl_context_info    /* param_name */, 
-                 size_t             /* param_value_size */, 
-                 void *             /* param_value */, 
-                 size_t *           /* param_value_size_ret */) CL_API_SUFFIX__VERSION_1_0;
+cl_clCreateContextCallback:
+  return_type: [void]
+  parameters:
+  - [const, char, '*', _]
+  - [const, void, '*', _]
+  - [size_t, _]
+  - [void, '*', _]
+clCreateContext:
+  return_type: [cl_context]
+  parameters:
+  - [const, cl_context_properties, '*', properties]
+  - [cl_uint, num_devices]
+  - [const, cl_device_id, '*', devices]
+  - [cl_clCreateContextCallback, callback]
+  - [void, '*', user_data]
+  - [cl_int, '*', errcode_ret]
+clCreateContextFromType:
+  return_type: [cl_context]
+  parameters:
+  - [const cl_context_properties, '*', properties]
+  - [cl_device_type, device_type]
+  - [cl_clCreateContextCallback, callback]
+  - [void, '*', user_data]
+  - [cl_int, '*', errcode_ret]
+clRetainContext:
+  return_type: [cl_int]
+  parameters:
+  - [cl_context, context]
+clReleaseContext:
+  return_type: [cl_int]
+  parameters:
+  - [cl_context, context]
+clGetContextInfo:
+  return_type: [cl_int]
+  parameters:
+  - [cl_context, context]
+  - [cl_context_info, param_name]
+  - [size_t, param_value_size]
+  - [void, '*', param_value]
+  - [size_t, '*',  param_value_size_ret]
 
 # Command Queue APIs
 
-extern CL_API_ENTRY cl_command_queue CL_API_CALL
-clCreateCommandQueue(cl_context                     /* context */, 
-                     cl_device_id                   /* device */, 
-                     cl_command_queue_properties    /* properties */,
-                     cl_int *                       /* errcode_ret */) CL_API_SUFFIX__VERSION_1_0;
-
-extern CL_API_ENTRY cl_int CL_API_CALL
-clRetainCommandQueue(cl_command_queue /* command_queue */) CL_API_SUFFIX__VERSION_1_0;
-
-extern CL_API_ENTRY cl_int CL_API_CALL
-clReleaseCommandQueue(cl_command_queue /* command_queue */) CL_API_SUFFIX__VERSION_1_0;
-
-extern CL_API_ENTRY cl_int CL_API_CALL
-clGetCommandQueueInfo(cl_command_queue      /* command_queue */,
-                      cl_command_queue_info /* param_name */,
-                      size_t                /* param_value_size */,
-                      void *                /* param_value */,
-                      size_t *              /* param_value_size_ret */) CL_API_SUFFIX__VERSION_1_0;
+clCreateCommandQueue:
+  return_type: [cl_command_queue]
+  parameters:
+  - [cl_context, context]
+  - [cl_device_id, device]
+  - [cl_command_queue_properties, properties]
+  - [cl_int, '*', errcode_ret]
+clRetainCommandQueue:
+  return_type: [cl_int]
+  parameters:
+  - [cl_command_queue, command_queue]
+clReleaseCommandQueue:
+  return_type: [cl_int]
+  parameters:
+  - [cl_command_queue, command_queue]
+clGetCommandQueueInfo:
+  return_type: [cl_int]
+  parameters:
+  - [cl_command_queue, command_queue]
+  - [cl_command_queue_info, param_name]
+  - [size_t, param_value_size]
+  - [void, '*', param_value]
+  - [size_t, '*', param_value_size_ret]
 
 # Memory Object APIs
 
-extern CL_API_ENTRY cl_mem CL_API_CALL
-clCreateBuffer(cl_context   /* context */,
-               cl_mem_flags /* flags */,
-               size_t       /* size */,
-               void *       /* host_ptr */,
-               cl_int *     /* errcode_ret */) CL_API_SUFFIX__VERSION_1_0;
-
-extern CL_API_ENTRY cl_mem CL_API_CALL
-clCreateSubBuffer(cl_mem                   /* buffer */,
-                  cl_mem_flags             /* flags */,
-                  cl_buffer_create_type    /* buffer_create_type */,
-                  const void *             /* buffer_create_info */,
-                  cl_int *                 /* errcode_ret */) CL_API_SUFFIX__VERSION_1_1;
-
-extern CL_API_ENTRY cl_mem CL_API_CALL
-clCreateImage(cl_context              /* context */,
-              cl_mem_flags            /* flags */,
-              const cl_image_format * /* image_format */,
-              const cl_image_desc *   /* image_desc */, 
-              void *                  /* host_ptr */,
-              cl_int *                /* errcode_ret */) CL_API_SUFFIX__VERSION_1_2;
-                        
+clCreateBuffer:
+  return_type: [cl_mem]
+  parameters:
+  - [cl_context, context]
+  - [cl_mem_flags, flags]
+  - [size_t, size]
+  - [void, '*', host_ptr]
+  - [cl_int, '*', errcode_ret]
+clCreateSubBuffer:
+  return_type: [cl_mem]
+  parameters:
+  - [cl_mem, buffer]
+  - [cl_mem_flags, flags]
+  - [cl_buffer_create_type, buffer_create_type]
+  - [const, void, '*', buffer_create_info]
+  - [cl_int, '*', errcode_ret]
+clCreateImage:
+  return_type: [cl_mem]
+  parameters:
+  - [cl_context, context]
+  - [cl_mem_flags, flags]
+  - [const, cl_image_format, '*',  image_format]
+  - [const, cl_image_desc, '*', image_desc]
+  - [void, '*', host_ptr]
+  - [cl_int, '*', errcode_ret]
+                   
 extern CL_API_ENTRY cl_int CL_API_CALL
 clRetainMemObject(cl_mem /* memobj */) CL_API_SUFFIX__VERSION_1_0;
 
@@ -137,14 +158,14 @@ clGetSupportedImageFormats(cl_context           /* context */,
                            cl_mem_object_type   /* image_type */,
                            cl_uint              /* num_entries */,
                            cl_image_format *    /* image_formats */,
-                           cl_uint *            /* num_image_formats */) CL_API_SUFFIX__VERSION_1_0;
+                           cl_uint *            /* num_image_formats */)
                                     
 extern CL_API_ENTRY cl_int CL_API_CALL
 clGetMemObjectInfo(cl_mem           /* memobj */,
                    cl_mem_info      /* param_name */, 
                    size_t           /* param_value_size */,
                    void *           /* param_value */,
-                   size_t *         /* param_value_size_ret */) CL_API_SUFFIX__VERSION_1_0;
+                   size_t *         /* param_value_size_ret
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clGetImageInfo(cl_mem           /* image */,
